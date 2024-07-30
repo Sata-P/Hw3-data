@@ -1,0 +1,65 @@
+enum Attribute {
+    STRENGTH {
+        @Override
+        public String toString() {
+          return "Strength";
+        }
+      },
+    AGILITY{
+        @Override
+        public String toString() {
+          return "Agility";
+        }
+      },
+    INTELLIGENCE{
+        @Override
+        public String toString() {
+          return "Intelligence";
+        }
+      },
+    UNIVERSAL{
+        @Override
+        public String toString() {
+          return "Universal";
+        }
+      }
+}
+
+public class Node {
+    public int heroId;
+    public String name;
+    public double hp;
+    public Attribute att;
+
+    Node next;
+    Node previous;
+    
+    // Constructor 1
+    public Node(int id, String name, double hp, Attribute att){
+        //START FIX HERE
+            this.heroId = id;
+            this.name = name;
+            this.hp = hp;
+            this.att = att;
+
+        //END FIX HERE
+    }
+    // Constructor 2
+    public Node(String name){
+        //START FIX HERE
+        this.name = name;
+        this.heroId = 0;
+        this.hp = 0.0; //double nha
+        this.att = null;
+        //END FIX HERE
+    }
+    // Constructor 3 (dummy)
+    public Node(){
+        // You can leave this function blank
+    }
+    
+    public void PrintHero(){
+        System.out.printf("HeroID: %s , Name: %s , HP: %.1f, Attribute: %s\n", heroId, name, hp, att);
+    }
+
+}
