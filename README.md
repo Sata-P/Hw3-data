@@ -1,0 +1,298 @@
+public class SinglyLinkedList {
+    Node head;
+    String listName;
+    
+    public SinglyLinkedList(String name){
+        this.listName = name;
+        this.head = null; 
+    }
+    
+    public void PopTail() {
+	//START FIX HERE
+        if (IsEmpty()){
+             System.out.println("ERROR");
+        }else{
+            if (head.next == null) {
+                head = null; // List becomes empty
+            } else {
+                Node current = head;
+                while (current.next.next != null) {
+                    current = current.next;
+                }
+                current.next = null;
+        }
+        //END FIX HERE
+    }
+    
+    }
+    public void PopHead(){
+	//START FIX HERE
+        if (IsEmpty()){
+            System.out.println("ERROR");
+        }else{
+             head = head.next;
+        }
+        //END FIX HERE
+    }
+    
+    public Node GetHead(){
+	//START FIX HERE
+        if (IsEmpty()){
+            System.out.println("ERROR");
+            return new Node("Empty List!");
+        } else {
+            return head;
+        }
+        //END FIX HERE
+    }
+    
+    public Node GetTail(){ 
+	//START FIX HERE
+        if (IsEmpty()){
+            System.out.println("ERROR");
+           return new Node("Empty List!");
+           
+        } else {
+            
+            Node current = head;
+            while(current != null){
+                
+                current = current.next;
+                
+            }
+            return current;
+            
+        }
+        //END FIX HERE
+    }
+    
+    public void PushHead(Node node){
+	//START FIX HERE
+        if (IsEmpty()){
+            head = node;
+        }else{
+            node.next = head;
+            head = node;
+        }
+        //END FIX HERE
+    }
+    
+    public void PushTail(Node node) {
+	//START FIX HERE
+        if (IsEmpty()){
+            
+            head = node;
+            
+        } else {
+            
+            Node current = head;
+            
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = node;
+        }
+        //END FIX HERE
+    }
+
+    public Node FindNode(int id){
+	//START FIX HERE
+    if (IsEmpty()) {
+        return new Node("Empty List!");
+    } else {
+        Node current = head;
+        while (current != null) {
+            if (current.heroId == id) {
+                return current;
+            }
+            current = current.next;
+        }
+        return new Node("Hero Not Found!");
+    }
+        //END FIX HERE
+    }
+    
+    public Node EraseNode(int id){
+	//START FIX HERE
+         if (IsEmpty()){
+            System.out.println("ERROR");
+            return new Node("Empty List!");
+        } else {
+            if (head.heroId == id) {
+                Node temp = head;
+                head = head.next;
+                return temp; // Return the removed head node
+            } else {
+                Node current = head;
+                while (current.next != null && current.next.heroId != id) {
+                    current = current.next;
+                }
+                if (current.next != null) {
+                    Node temp = current.next;
+                    current.next = current.next.next;
+                    return temp; // Return the removed node
+                } else {
+                    return new Node("Hero Not Found!");
+                }
+            }
+        }
+        //END FIX HERE
+    }
+    
+    public void AddNodeAfter(Node node1, Node node2){
+	//START FIX HERE
+	  Node current = head;
+    while (current != null && current.heroId != node1.heroId) {
+        current = current.next;
+    }
+    if (current != null) {
+        node2.next = current.next;
+        current.next = node2;
+    }
+	
+        //END FIX HERE
+    }
+    
+    public void AddNodeBefore(Node node1, Node node2){
+	//START FIX HERE
+	if (head == null) {
+        return;
+    }
+    if (head.heroId == node1.heroId) {
+        node2.next = head;
+        head = node2;
+        return;
+    }
+    Node current = head;
+    while (current.next != null && current.next.heroId != node1.heroId) {
+        current = current.next;
+    }
+    if (current.next != null) {
+        node2.next = current.next;
+        current.next = node2;
+    }
+        //END FIX HERE
+    }
+    
+    public boolean IsEmpty(){
+	//START FIX HERE
+        return head == null;
+        //END FIX HERE
+    }
+    public void Merge(SinglyLinkedList list){
+	//START FIX HERE
+	if (list.IsEmpty()) return;
+
+    if (this.IsEmpty()) {
+        this.head = list.head;
+        return;
+    }
+
+    Node current = this.head;
+    while (current.next != null) {
+        current = current.next;
+    }
+    current.next = list.head;
+        //END FIX HERE        
+    }
+    
+    public void PrintStructure(){
+	//START FIX HERE
+         Node current = head; 
+    System.out.print(listName + ": head -> ");
+    while (current != null) {
+        System.out.print("{" + current.heroId + "} -> ");
+        current = current.next;
+    }
+    System.out.println("null");
+        //END FIX HERE
+    }
+    
+    public Node GetHighestHPHero(){
+	//START FIX HERE
+        if (IsEmpty()) {
+            return new Node("Empty List!");
+        } else {
+            
+            Node highest = head;
+            Node current = head.next;
+            while (current != null) {
+                if (current.hp > highest.hp) {
+                    highest = current;
+                }
+                current = current.next;
+            }
+            
+            return highest;
+
+        }
+        //END FIX HERE
+    }
+    
+    public double GetMiddleHP(){
+        //START FIX HERE
+        if (IsEmpty()) {
+            return 0.0;
+        }else {
+            Node current = head;
+            int count = 0;
+            while (current != null) {
+                count++;
+                current = current.next;
+            }
+            int midc = count/2;
+            current = head;
+            for (int i = 0; i < midc; i++) {
+                current = current.next;
+            }
+            if (count % 2 == 0 && current.next != null) {
+                return (current.hp + current.next.hp)/2;
+            } else {
+                return current.hp;
+            }
+        
+        //END FIX HERE
+    }
+        
+    }
+
+    public void PrintHeroWithType(Attribute att){
+       if (IsEmpty()) {
+        System.out.println("Empty List!");
+        return;
+    }
+    
+    Node current = head;
+    int count = 0;
+    
+  
+    while (current != null) {
+        if (current.att == att) {
+            count++;
+        }
+        current = current.next;
+    }
+    
+   
+    if (count == 0) {
+        System.out.println("There is no hero with this attribute");
+    } else if (count == 1) {
+        System.out.printf("Print Hero With This Attribute: %s has %d hero\n", att, count);
+    } else {
+        System.out.printf("Print Hero With This Attribute: %s has %d heroes\n", att, count);
+    }
+    
+ 
+    current = head;
+    int number = 1; // Start numbering from 1
+    while (current != null) {
+        if (current.att == att) {
+            System.out.printf("%d. HeroID: %d, Name: %s, HP: %.1f, Attribute: %s\n",
+                              number, current.heroId, current.name, current.hp, current.att);
+            number++;
+        }
+        current = current.next;
+    }
+}
+
+}
